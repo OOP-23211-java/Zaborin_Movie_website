@@ -15,10 +15,14 @@ public class Seat {
     private int number;
     private boolean booked;
 
+//    @ManyToOne
+//    @JoinColumn(name = "movie_id")
+//    @JsonBackReference
+//    private Movie movie;
     @ManyToOne
-    @JoinColumn(name = "movie_id")
+    @JoinColumn(name = "schedule_id")
     @JsonBackReference
-    private Movie movie;
+    private Schedule schedule;
 
     public Seat () {
     }
@@ -71,11 +75,19 @@ public class Seat {
         this.booked = booked;
     }
 
-    public Movie getMovie() {
-        return movie;
+    public Schedule getSchedule() {
+        return schedule;
     }
 
-    public void setMovie(Movie movie) {
-        this.movie = movie;
+    public void setSchedule(Schedule schedule) {
+        this.schedule = schedule;
     }
+
+//    public Movie getMovie() {
+//        return movie;
+//    }
+//
+//    public void setMovie(Movie movie) {
+//        this.movie = movie;
+//    }
 }

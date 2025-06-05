@@ -1,5 +1,6 @@
 package com.example.moviebooking.controller;
 
+import com.example.moviebooking.model.Schedule;
 import com.example.moviebooking.model.Seat;
 import com.example.moviebooking.service.MovieService;
 import com.example.moviebooking.service.SeatService;
@@ -17,11 +18,15 @@ public class SeatRestController {
         this.seatService = seatService;
         this.movieService = movieService;
     }
-
     @GetMapping("/{movieId}")
-    public List<Seat> getSeats(@PathVariable Long movieId) {
+    public List<Schedule> getSchedule(@PathVariable Long movieId) {
         //return seatService.getSeatsByMovie(movieId);
-        return movieService.getSeatById(movieId);
+        return movieService.getScheduleById(movieId);
+    }
+    @GetMapping("/{movieId}/{date}")
+    public List<Seat> getSeats(@PathVariable Long movieId, @PathVariable String date) {
+        //return seatService.getSeatsByMovie(movieId);
+        return movieService.getSeatById(movieId,date);
     }
 
     @PostMapping("/book/{seatId}")

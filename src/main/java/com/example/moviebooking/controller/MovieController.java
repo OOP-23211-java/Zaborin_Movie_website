@@ -30,6 +30,11 @@ public class MovieController {
     @GetMapping("/movie/{id}/seats1")
     public String selectSeats1(@PathVariable Long id, Model model) {
         model.addAttribute("movie", movieService.getMovieById(id));
+        return "chooseDate";
+    }
+    @GetMapping("/movie/{id}/seats1/{date}")
+    public String selectSeats2(@PathVariable Long id, @PathVariable String date, Model model) {
+        model.addAttribute("movie", movieService.getMovieById(id));
         return "seats1";
     }
 }

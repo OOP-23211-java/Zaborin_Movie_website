@@ -4,6 +4,6 @@ import com.example.moviebooking.model.Seat;
 import java.util.List;
 
 public interface SeatService {
-    List<Seat> getSeatsByMovie(Long movieId);
+    //List<Seat> getSeatsByMovie(Long movieId);
     Seat bookSeat(Long seatId);
 }

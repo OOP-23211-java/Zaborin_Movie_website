@@ -14,10 +14,10 @@ public class SeatServiceImpl implements SeatService {
         this.seatRepository = seatRepository;
     }
 
-    @Override
-    public List<Seat> getSeatsByMovie(Long movieId) {
-        return seatRepository.findByMovieId(movieId);
-    }
+//    @Override
+//   public List<Seat> getSeatsByMovie(Long movieId) {
+//        return seatRepository.findByMovieId(movieId);
+//    }
 
     @Override
     public Seat bookSeat(Long seatId) {

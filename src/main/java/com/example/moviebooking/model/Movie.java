@@ -1,7 +1,10 @@
 package com.example.moviebooking.model;
 
 import jakarta.persistence.*;
+
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Entity
 public class Movie {
@@ -14,15 +17,18 @@ public class Movie {
     private String description;
     private String genre;
 
-    @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL)
-    private List<Seat> seats;
+//    @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL)
+//    List<Seat> seats;
 
-    public Movie(String imgSrc, String title, String genre, String description, List<Seat> seats) {
+    @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Schedule> schedules = new ArrayList<>();
+
+    public Movie(String imgSrc, String title, String genre, String description, List<Schedule> schedules) {
         this.imgSrc = imgSrc;
         this.title = title;
         this.genre = genre;
         this.description = description;
-        this.seats = seats;
+        this.schedules = schedules;
     }
     public Movie() {
     }
@@ -56,13 +62,13 @@ public class Movie {
         this.description = description;
     }
 
-    public List<Seat> getSeats() {
-        return seats;
-    }
-
-    public void setSeats(List<Seat> seats) {
-        this.seats = seats;
-    }
+//    public List<Seat> getSeats(String date) {
+//        return seats.get(date);
+//    }
+//
+//    public void setSeats(Map<String, List<Seat>> seats) {
+//        this.seats = seats;
+//    }
 
     public String getImgSrc() {
         return imgSrc;
@@ -70,5 +76,13 @@ public class Movie {
 
     public void setImgSrc(String imgSrc) {
         this.imgSrc = imgSrc;
+    }
+
+    public List<Schedule> getSchedules() {
+        return schedules;
+    }
+
+    public void setSchedules(List<Schedule> schedules) {
+        this.schedules = schedules;
     }
 }
