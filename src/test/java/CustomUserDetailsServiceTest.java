@@ -1,7 +1,7 @@
 
-import com.example.moviebooking.model.User;
-import com.example.moviebooking.repository.UserRepository;
-import com.example.moviebooking.service.CustomUserDetailsService;
+import com.app.moviebooking.model.User;
+import com.app.moviebooking.repository.UserRepository;
+import com.app.moviebooking.service.CustomUserDetailsService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -15,7 +15,6 @@ import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.*;
 import static org.mockito.Mockito.*;
-import static org.assertj.core.api.Assertions.*;
 
 @ExtendWith(MockitoExtension.class)
 class CustomUserDetailsServiceTest {

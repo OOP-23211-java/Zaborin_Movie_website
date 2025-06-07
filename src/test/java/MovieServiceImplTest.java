@@ -1,9 +1,9 @@
 
-import com.example.moviebooking.model.Movie;
-import com.example.moviebooking.model.Schedule;
-import com.example.moviebooking.model.Seat;
-import com.example.moviebooking.repository.MovieRepository;
-import com.example.moviebooking.service.MovieServiceImpl;
+import com.app.moviebooking.model.Movie;
+import com.app.moviebooking.model.Schedule;
+import com.app.moviebooking.model.Seat;
+import com.app.moviebooking.repository.MovieRepository;
+import com.app.moviebooking.service.MovieServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
