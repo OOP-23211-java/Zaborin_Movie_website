@@ -8,9 +8,19 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
+
+/**
+ * Утилита для создания расписаний с пустыми местами.
+ */
 @Service
 public class ScheduleInitializer {
-
+    /**
+     * Создает расписание на указанную дату с пустыми местами.
+     *
+     * @param movie объект фильма
+     * @param date  дата сеанса в формате строки
+     * @return объект Schedule с созданными местами
+     */
     public static Schedule createScheduleWithEmptySeats(Movie movie, String date) {
         // Создаем расписание на указанную дату
         Schedule schedule = new Schedule();
@@ -23,7 +33,12 @@ public class ScheduleInitializer {
 
         return schedule;
     }
-
+    /**
+     * Генерирует список пустых мест для расписания.
+     *
+     * @param schedule объект расписания
+     * @return список объектов Seat
+     */
     private static List<Seat> generateEmptySeats(Schedule schedule) {
         List<Seat> seats = new ArrayList<>();
 

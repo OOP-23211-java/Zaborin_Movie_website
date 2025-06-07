@@ -16,7 +16,7 @@ function renderSeats(schedule, container, movieId) {
   schedule.forEach(schedule => {
     const btn = document.createElement('button');
     btn.textContent = `${schedule.date}`;
-    const targetUrl = `/movie/${movieId}/seats1/${schedule.date}`; ///movie/{id}/seats1/{data}
+    const targetUrl = `/movie/${movieId}/chooseDate/${schedule.date}`; ///movie/{id}/seats1/{data}
 
     btn.addEventListener('click', () => {
       window.location.href = targetUrl;
@@ -31,7 +31,7 @@ function renderSeats(schedule, container, movieId) {
 
 
   function openBookingWindow(movieId) {
-      const url = '/movie/' + movieId + '/seats1'
+      const url = '/movie/' + movieId + '/chooseDate'
       const width = 400;
           const height = 600;
 

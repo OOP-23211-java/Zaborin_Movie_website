@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import jakarta.validation.Valid;
-
+/**
+ * Контроллер для управления регистрацией и авторизацией пользователей.
+ */
 @Controller
 public class AuthController {
 
@@ -22,13 +24,25 @@ public class AuthController {
     public AuthController(UserService userService) {
         this.userService = userService;
     }
-
+    /**
+     * Отображает форму регистрации нового пользователя.
+     *
+     * @param model модель для передачи данных в шаблон
+     * @return имя шаблона registration.html
+     */
     @GetMapping("/registration")
     public String showRegistrationForm(Model model) {
         model.addAttribute("registrationForm", new User());
         return "registration";   // возвращаем шаблон registration.html
     }
-
+    /**
+     * Обрабатывает POST-запрос на регистрацию нового пользователя.
+     *
+     * @param form          объект User с данными из формы
+     * @param bindingResult результат валидации формы
+     * @param model         модель для передачи данных в шаблон
+     * @return перенаправление на страницу логина при успехе или повторная форма при ошибке
+     */
     @PostMapping("/registration")
     public String processRegistration(
             @ModelAttribute("registrationForm") @Valid User form,
@@ -54,7 +68,11 @@ public class AuthController {
 
         return "redirect:/login?registered";
     }
-
+    /**
+     * Отображает форму логина пользователя.
+     *
+     * @return имя шаблона login.html
+     */
     @GetMapping("/login")
     public String showLoginForm() {
         return "login";   // вернём шаблон login.html
