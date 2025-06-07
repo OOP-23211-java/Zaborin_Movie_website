@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="'Бронирование: ' + ${movie.title}"></title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <script src="/js/main.js" defer></script>
+</head>
+<body>
+<header>
+    <h1 th:text="${movie.title}"></h1>
+</header>
+
+<main>
+    <section id="seats-container" class="seats-grid"></section>
+</main>
+
+<!-- Модальное окно покупки -->
+<div id="purchaseModal" class="modal" style="display:none; position:fixed; top:0; left:0;
+     width:100%; height:100%; background:rgba(0,0,0,0.6); align-items:center; justify-content:center;">
+    <div class="registration-container" style="background:#fff; padding:20px; border-radius:8px; max-width:400px; width:100%;">
+        <h2>Оплата билета</h2>
+        <form id="purchaseForm" class="registration-form">
+            <div class="form-field">
+                <label for="cardNumber">Номер карты</label>
+                <input type="text" id="cardNumber" name="cardNumber" required maxlength="19" placeholder="XXXX XXXX XXXX XXXX">
+            </div>
+            <div class="form-field">
+                <label for="cardName">Имя на карте</label>
+                <input type="text" id="cardName" name="cardName" required placeholder="Иван Иванов">
+            </div>
+            <div class="form-field" style="display:flex; gap:10px;">
+                <div style="flex:1;">
+                    <label for="expiry">Срок до</label>
+                    <input type="text" id="expiry" name="expiry" required placeholder="MM/YY">
+                </div>
+                <div style="flex:1;">
+                    <label for="cvv">CVV</label>
+                    <input type="text" id="cvv" name="cvv" required maxlength="3" placeholder="123">
+                </div>
+            </div>
+            <div class="actions">
+                <button type="submit">Оплатить</button>
+                <button type="button" id="cancelBtn">Отмена</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>
