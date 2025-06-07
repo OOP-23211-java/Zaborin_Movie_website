@@ -55,7 +55,7 @@ class SeatServiceImplTest {
 
         assertThatThrownBy(() -> seatService.bookSeat(999L))
                 .isInstanceOf(RuntimeException.class)
-                .hasMessageContaining("Seat not found");
+                .hasMessageContaining("Seat with id=" + 999 + " not found");
 
         verify(seatRepository, times(1)).findById(999L);
         verify(seatRepository, never()).save(any());

@@ -147,7 +147,7 @@ class MovieServiceImplTest {
 
         assertThatThrownBy(() -> movieService.getSeatById(999L, "2025-06-10"))
                 .isInstanceOf(RuntimeException.class)
-                .hasMessageContaining("Movie not found");
+                .hasMessageContaining("Movie with id=" + 999 + " not found");
 
         verify(movieRepository, times(1)).findById(999L);
     }

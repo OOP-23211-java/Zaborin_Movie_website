@@ -1,11 +1,16 @@
 package com.example.moviebooking.service;
 
+import com.example.moviebooking.exception.EmailAlreadyRegisteredException;
+import com.example.moviebooking.exception.UsernameAlreadyTakenException;
 import com.example.moviebooking.model.User;
 import com.example.moviebooking.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+/**
+ * Сервис для управления пользователями: регистрация, поиск и т.д.
+ */
 @Service
 public class UserService {
 
@@ -20,18 +25,22 @@ public class UserService {
     }
 
     /**
-     * Регистрирует нового пользователя,
-     * возвращает сохранённого User или выбрасывает исключение, если логин/email заняты.
+     * Регистрирует нового пользователя.
+     *
+     * @param user объект User с незашифрованным паролем
+     * @return сохранённый пользователь с зашифрованным паролем
+     * @throws UsernameAlreadyTakenException   если указанный логин уже занят
+     * @throws EmailAlreadyRegisteredException если указанный email уже зарегистрирован
      */
     public User registerNewUser(User user) {
         userRepository.findByUsername(user.getUsername())
                 .ifPresent(u -> {
-                    throw new RuntimeException("Логин уже занят");
+                    throw new UsernameAlreadyTakenException(user.getUsername());
                 });
 
         userRepository.findByEmail(user.getEmail())
                 .ifPresent(u -> {
-                    throw new RuntimeException("Email уже зарегистрирован");
+                    throw new EmailAlreadyRegisteredException(user.getEmail());
                 });
 
         user.setPassword(passwordEncoder.encode(user.getPassword()));

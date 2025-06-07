@@ -68,7 +68,7 @@ class UserServiceTest {
 
         assertThatThrownBy(() -> userService.registerNewUser(newUser))
                 .isInstanceOf(RuntimeException.class)
-                .hasMessageContaining("Логин уже занят");
+                .hasMessageContaining("Login '" + "alice" + "' already taken");
 
         verify(userRepository, times(1)).findByUsername("alice");
         verify(userRepository, never()).findByEmail(any());
@@ -85,7 +85,7 @@ class UserServiceTest {
 
         assertThatThrownBy(() -> userService.registerNewUser(newUser))
                 .isInstanceOf(RuntimeException.class)
-                .hasMessageContaining("Email уже зарегистрирован");
+                .hasMessageContaining("Email '" + "alice@example.com"  + "' already taken");
 
         verify(userRepository, times(1)).findByUsername("alice");
         verify(userRepository, times(1)).findByEmail("alice@example.com");

@@ -1,66 +1,18 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title th:text="${movie.title}">Детали фильма</title>
-  <link rel="stylesheet" th:href="@{/css/styles1.css}">
-  <script src="/js/main.js" defer></script>
+    <meta charset="UTF-8">
+    <title th:text="'Бронирование: ' + ${movie.title}"></title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <script src="/js/main.js" defer></script>
 </head>
 <body>
-
 <header>
-  <div class="header-filed">
-    <h1 th:text="${movie.title}">Название фильма</h1>
-    <div sec:authorize="!isAuthenticated()" class="h-buttons">
-      <div class="h-button-inner">
-        <div class="h-button button">
-          <a th:href="@{/registration}">Регистрация</a>
-        </div>
-        <div class="h-button button">
-          <a th:href="@{/login}">Войти</a>
-        </div>
-      </div>
-    </div>
-
-    <div sec:authorize="isAuthenticated()" class="h-buttons">
-      <form th:action="@{/logout}" method="post" class="h-button-inner">
-        <button type="submit" class="h-button button">
-          <a >Выход</a>
-        </button>
-      </form>
-    </div>
-  </div>
+    <h1 th:text="${movie.title}"></h1>
 </header>
 
 <main>
-  <div class="movie-detail">
-    <!-- Постер -->
-    <div class="movie-image">
-      <img th:src="@{'/images/' + ${movie.imgSrc}}"
-           th:alt="${movie.title}"
-           class="movie-image"/>
-    </div>
-
-    <!-- Жанры -->
-    <div class="movie-genre" th:text="'Жанры: ' + ${movie.genre}"></div>
-
-    <!-- Описание -->
-    <div class="movie-discr" th:text="${movie.description}"></div>
-
-    <!-- Контейнер кнопок -->
-    <div class="movie-actions">
-      <!-- Ссылка назад -->
-      <a th:href="@{/}" class="back-link">← Вернуться к списку</a>
-
-      <!-- Кнопка «Бронировать» через th:onclick -->
-      <button type="button"
-              class="book-button"
-              th:onclick="'openBookingWindow(' + ${movie.id} + ')'">
-        Забронировать
-      </button>
-    </div>
-  </div>
+    <section id="seats-container" class="seats-grid"></section>
 </main>
-
 </body>
 </html>

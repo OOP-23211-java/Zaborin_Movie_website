@@ -2,13 +2,13 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title th:text="'Бронирование: ' + ${movie.title}"></title>
+    <title th:text="'Выбор даты: ' + ${movie.title}"></title>
     <link rel="stylesheet" th:href="@{/css/style.css}">
     <script src="/js/chooseDate.js" defer></script>
 </head>
 <body>
 <header>
-    <h1 th:text="${movie.title}"></h1>
+    <h1 th:text="'Выбор даты на фильм: ' + ${movie.title}"></h1>
 </header>
 
 <main>

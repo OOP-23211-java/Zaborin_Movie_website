@@ -31,3 +31,31 @@ function bookSeat(seatId, btn) {
           alert('Место забронировано!');
       });
 }
+ function openBookingWindow(movieId) {
+      const url = '/movie/' + movieId + '/chooseDate'
+      const width = 400;
+          const height = 600;
+
+          const left = (window.screen.width - width) / 2;
+          const top = (window.screen.height - height) / 2;
+
+          const options = [
+              `width=${width}`,
+              `height=${height}`,
+              `left=${left}`,
+              `top=${top}`,
+              'resizable=no',
+              'scrollbars=no',
+              'toolbar=no',
+              'menubar=no',
+              'location=no',
+              'status=no'
+          ].join(',');
+
+         let params = `scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,
+         width=${width},height=${height},left=${left},top=${top}`;
+
+
+          // Открытие окна
+          return window.open(url, 'bookingWindow', params);
+  }

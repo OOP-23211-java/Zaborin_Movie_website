@@ -63,7 +63,7 @@ class CustomUserDetailsServiceTest {
         assertThatThrownBy(() ->
                 customUserDetailsService.loadUserByUsername("unknown")
         ).isInstanceOf(UsernameNotFoundException.class)
-                .hasMessageContaining("Пользователь не найден");
+                .hasMessageContaining("User 'unknown' not found");
 
         verify(userRepository, times(1)).findByUsername("unknown");
     }

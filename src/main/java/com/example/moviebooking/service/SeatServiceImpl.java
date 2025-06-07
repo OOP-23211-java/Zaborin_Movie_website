@@ -1,10 +1,13 @@
 package com.example.moviebooking.service;
 
+import com.example.moviebooking.exception.SeatNotFoundException;
 import com.example.moviebooking.model.Seat;
 import com.example.moviebooking.repository.SeatRepository;
 import org.springframework.stereotype.Service;
 import java.util.List;
-
+/**
+ * Реализация сервиса для работы с местами (Seats).
+ */
 @Service
 public class SeatServiceImpl implements SeatService {
 
@@ -18,11 +21,17 @@ public class SeatServiceImpl implements SeatService {
 //   public List<Seat> getSeatsByMovie(Long movieId) {
 //        return seatRepository.findByMovieId(movieId);
 //    }
-
+    /**
+     * Бронирует место по его идентификатору.
+     *
+     * @param seatId идентификатор места
+     * @return обновлённый объект Seat (с пометкой booked=true)
+     * @throws SeatNotFoundException если место не найдено
+     */
     @Override
     public Seat bookSeat(Long seatId) {
         Seat seat = seatRepository.findById(seatId)
-                .orElseThrow(() -> new RuntimeException("Seat not found"));
+                .orElseThrow(() -> new SeatNotFoundException(seatId));
         seat.setBooked(true);
         return seatRepository.save(seat);
     }

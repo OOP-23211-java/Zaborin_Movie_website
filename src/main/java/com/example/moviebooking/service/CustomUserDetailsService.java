@@ -12,6 +12,9 @@ import org.springframework.stereotype.Service;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * Сервис для интеграции с Spring Security. Загружает детали пользователя из БД.
+ */
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
 
@@ -23,14 +26,18 @@ public class CustomUserDetailsService implements UserDetailsService {
     }
 
     /**
-     * Загружает пользователя по имени (логину) для Spring Security.
+     * Загружает пользователя по имени (логину).
+     *
+     * @param username имя пользователя (логин)
+     * @return объект UserDetails, содержащий имя, пароль и роли
+     * @throws UsernameNotFoundException если пользователь не найден
      */
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findByUsername(username)
-                .orElseThrow(() -> new UsernameNotFoundException("Пользователь не найден"));
+                .orElseThrow(() -> new UsernameNotFoundException(
+                        "User '" + username + "' not found"));
 
-        // Здесь можно назвать роль, пока пусть будет одна ROLE_USER
         Set<GrantedAuthority> authorities = new HashSet<>();
         authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
 

@@ -22,19 +22,19 @@ public class MovieController {
         return "index";
     }
 
-    @GetMapping("/movie/{id}/seats")
-    public String selectSeats(@PathVariable Long id, Model model) {
+    @GetMapping("/movie/{id}/")
+    public String movieDescription(@PathVariable Long id, Model model) {
         model.addAttribute("movie", movieService.getMovieById(id));
-        return "seats";
+        return "movieDescription";
     }
-    @GetMapping("/movie/{id}/seats1")
+    @GetMapping("/movie/{id}/chooseDate")
     public String selectSeats1(@PathVariable Long id, Model model) {
         model.addAttribute("movie", movieService.getMovieById(id));
         return "chooseDate";
     }
-    @GetMapping("/movie/{id}/seats1/{date}")
+    @GetMapping("/movie/{id}/chooseDate/{date}")
     public String selectSeats2(@PathVariable Long id, @PathVariable String date, Model model) {
         model.addAttribute("movie", movieService.getMovieById(id));
-        return "seats1";
+        return "seats";
     }
 }

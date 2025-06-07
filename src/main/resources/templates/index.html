@@ -42,7 +42,7 @@
             <div class="movie-discr" th:text="'Синопсис: ' + ${movie.description}"></div>
 
             <div class="movie-title">
-                <a th:href="@{/movie/{id}/seats(id=${movie.id})}" th:text="${movie.title}"></a>
+                <a th:href="@{/movie/{id}/(id=${movie.id})}" th:text="${movie.title}"></a>
             </div>
         </div>
     </div>

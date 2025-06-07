@@ -16,10 +16,8 @@ function renderSeats(schedule, container, movieId) {
   schedule.forEach(schedule => {
     const btn = document.createElement('button');
     btn.textContent = `${schedule.date}`;
-    // Динамически создаём URL, куда хотим перейти
     const targetUrl = `/movie/${movieId}/seats1/${schedule.date}`; ///movie/{id}/seats1/{data}
 
-    // По клику делаем перенаправление
     btn.addEventListener('click', () => {
       window.location.href = targetUrl;
       // Если нужно открыть в новом окне/вкладке:

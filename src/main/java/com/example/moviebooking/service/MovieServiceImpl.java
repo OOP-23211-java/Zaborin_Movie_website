@@ -1,12 +1,15 @@
 package com.example.moviebooking.service;
 
+import com.example.moviebooking.exception.MovieNotFoundException;
 import com.example.moviebooking.model.Movie;
 import com.example.moviebooking.model.Schedule;
 import com.example.moviebooking.model.Seat;
 import com.example.moviebooking.repository.MovieRepository;
 import org.springframework.stereotype.Service;
 import java.util.List;
-
+/**
+ * Реализация сервиса для работы с фильмами.
+ */
 @Service
 public class MovieServiceImpl implements MovieService {
 
@@ -15,26 +18,50 @@ public class MovieServiceImpl implements MovieService {
     public MovieServiceImpl(MovieRepository movieRepository) {
         this.movieRepository = movieRepository;
     }
-
+    /**
+     * Возвращает список всех фильмов.
+     *
+     * @return список Movie
+     */
     @Override
     public List<Movie> getAllMovies() {
         return movieRepository.findAll();
     }
-
+    /**
+     * Ищет фильм по идентификатору.
+     *
+     * @param id идентификатор фильма
+     * @return найденный Movie
+     * @throws MovieNotFoundException если фильм не найден
+     */
     @Override
     public Movie getMovieById(Long id) {
         return movieRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Movie not found"));
+                .orElseThrow(() ->  new MovieNotFoundException(id));
     }
+    /**
+     * Получает расписание по идентификатору фильма.
+     *
+     * @param id идентификатор фильма
+     * @return список Schedule
+     * @throws MovieNotFoundException если фильм не найден
+     */
     @Override
     public List<Schedule> getScheduleById(Long id) {
-        Movie movie = movieRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Movie not found"));
+        Movie movie = getMovieById(id);
         return movie.getSchedules();
     }
+    /**
+     * Получает список мест на конкретную дату.
+     *
+     * @param id   идентификатор фильма
+     * @param date дата в формате YYYY-MM-DD
+     * @return список Seat для выбранной даты
+     * @throws MovieNotFoundException если фильм не найден
+     */
     @Override
     public List<Seat> getSeatById(Long id, String date) {
-        Movie movie = movieRepository.findById(id).orElseThrow(() -> new RuntimeException("Movie not found"));
+        Movie movie = movieRepository.findById(id).orElseThrow(() ->  new MovieNotFoundException(id));
         List<Schedule> schedules = movie.getSchedules();
         Schedule schedule = schedules.get(0);
         for (Schedule sh : schedules) {
